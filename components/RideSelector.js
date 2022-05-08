@@ -1,7 +1,11 @@
 import React from 'react'
-import Image from 'next/image'
 import ethLogo from '../assets/eth-logo.png'
-import { useEffect, useState } from 'react'
+import uberBlack from '../assets/cars/uberBlack.png'
+import uberXwhite from '../assets/cars/uberXwhite.png'
+import Image from 'next/image'
+import { useEffect, useContext, useState } from 'react'
+import { UberContext } from '../lib/uberContext'
+
 
 const style = {
     
@@ -22,28 +26,31 @@ const style = {
 
 const basePrice=1542
 
+const carList = [
+{
+  service: 'UberX',
+  iconUrl: uberXwhite,
+  priceMultiplier: 1
+
+},
+{
+    service: 'UberBlack',
+    iconUrl: uberBlack,
+    priceMultiplier: 1.5
+  
+  }
+
+
+]
 const RideSelector = () => {
-    const [carList, setCarList] = useState([])
-    useEffect(() => {
-        ;(async () => {
-          try {
-            const response = await fetch('/api/db/getRideTypes')
-    
-            const data = await response.json()
-            setCarList(data.data)
-            setSelectedRide(data.data[0])
-          } catch (error) {
-            console.error(error)
-          }
-        })()
-    },[])
+  
   
     return (
          <div className = {style.wrapper}>
          <div className ={style.title}> choose a ride, or swipe up for more</div>
              <div className ={style.carList}>
-            {carList.map((car, index) => (
-             <div className={style.car}>
+            {carList.map((car,index) => (
+             <div  key={index} className={style.car}>
                 <Image
                   src={car.iconUrl}
                   className={style.carImage}

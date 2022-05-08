@@ -1,5 +1,6 @@
 import React from 'react'
 import RideSelector from './RideSelector'
+import { UberContext } from '../lib/uberContext'
 
 
 
