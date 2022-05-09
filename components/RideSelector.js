@@ -1,7 +1,7 @@
 import React from 'react'
 import ethLogo from '../assets/eth-logo.png'
-import uberBlack from '../assets/cars/uberBlack.png'
-import uberXwhite from '../assets/cars/uberXwhite.png'
+import rapidBlack from '../assets/cars/rapidBlack.png'
+import rapidWhite from '../assets/cars/rapidwhite.png'
 import Image from 'next/image'
 import { useEffect, useContext, useState } from 'react'
 import { UberContext } from '../lib/uberContext'
@@ -28,14 +28,14 @@ const basePrice=1542
 
 const carList = [
 {
-  service: 'UberX',
-  iconUrl: uberXwhite,
+  service: 'rapidX',
+  iconUrl: rapidWhite,
   priceMultiplier: 1
 
 },
 {
-    service: 'UberBlack',
-    iconUrl: uberBlack,
+    service: 'rapidBlack',
+    iconUrl: rapidBlack,
     priceMultiplier: 1.5
   
   }
