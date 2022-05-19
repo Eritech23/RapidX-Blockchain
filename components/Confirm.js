@@ -1,6 +1,10 @@
 import React from 'react'
 import RideSelector from './RideSelector'
-import { UberContext } from '../lib/uberContext'
+import { useContext } from 'react'
+import { RapidXContext } from '../context/rapidXcontext'
+import {ethers} from 'ethers';
+
+
 
 
 
@@ -11,27 +15,71 @@ const style ={
     confirmButton: `bg-black text-white m-4 py-4 text-center text-xl`,
 }
 
-const storeTripDetails = async () => {}
+const  Confirm = ()=> {
+ const{ 
+  
+  currentAccount,
+  connectWallet,
+  sendTransaction,
+  formData,
+  pickup,
+  dropoff,
+  price,
+  selectedRide,
+  pickupCoordinates,
+  dropoffCoordinates,
+  metamask,
+} = useContext(RapidXContext)
 
 
-const Confirm = () => {
+
+
+
+const storeTripDetails = async (pickup, dropoff) => {
+  try {
+    await fetch('/api/db/saveTrips', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        pickupLocation: pickup,
+        dropoffLocation: dropoff,
+        userWalletAddress: currentAccount,
+        price: price,
+        selectedRide: selectedRide,
+      }),
+    })
+
+    //sendTransaction()
+
+} catch (error) {
+  console.error(error)
+}
+}
+
+
+
+
+   
+
+
   return (
     <div className={style.wrapper}>
       <div className={style.rideSelectorContainer}>
-        <RideSelector />
+      {pickupCoordinates && dropoffCoordinates && <RideSelector />}
       </div>
       <div className={style.confirmButtonContainer}>
         <div className={style.confirmButtonContainer}>
           <div
             className={style.confirmButton}
-            onClick={() => storeTripDetails(pickup, dropoff)}
+            onClick={() => storeTripDetails(pickup, dropoff)   && sendTransaction() }
           >
-            Confirm ride
+            Confirm{selectedRide.service || ' RapidX'}
           </div>
         </div>
       </div>
     </div>
   )
 }
-
 export default Confirm

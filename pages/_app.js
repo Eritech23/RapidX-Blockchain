@@ -1,12 +1,12 @@
 import '../styles/globals.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { UberProvider } from '../lib/uberContext'
+import { RapidXProvider,RapidXContext } from '../context/rapidXcontext'
 
 function MyApp({ Component, pageProps }) {
   return (
-     <UberProvider>
+     <RapidXProvider>
     <Component {...pageProps} />
-    </UberProvider>
+    </RapidXProvider>
   )
 }
 
